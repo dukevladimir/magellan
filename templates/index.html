@@ -2,6 +2,8 @@
 
 {% block title %}magellen{% endblock %}
 
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+
 {% block navbar %}
 
 <div class = "navbar navbar-inverse" role="navigation">
@@ -24,6 +26,7 @@
 	</div>
 </div>
 {% endblock %}
+
 {% block content %}
 
 <div class = "container">	
@@ -33,14 +36,13 @@
 		<h1>Where do you want to go today ?</h1>
 
 		<div class = "chat">
-			
-			<ul>
-				<li>
-					<h2>agent:Hello!</h2>
-					<textarea>Input...</textarea>
-				</li>
-			</ul>
 
+			{% for chat in chats%}
+			<li style="list-style: none;" id="Me">{{chat.phrase}}</li>
+			{% endfor %}
+			
+			{% import "bootstrap/wtf.html" as wtf %}
+			{{ wtf.quick_form(form) }}
 
 		</div>
 
