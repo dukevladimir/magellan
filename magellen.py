@@ -29,7 +29,7 @@ def index():
 	#chats  = Conversation.query.all()
 	if form.validate_on_submit():
 		chat = Conversation(phrase = form.sentence.data,speaker = 1)
-		response = handler()
+		response = handler(form.sentence.data)
 		db.session.add(chat)
 		db.session.add(response)
 		db.session.commit()
@@ -44,6 +44,10 @@ class Conversation(db.Model):
 	phrase = db.Column(db.String(64))
 	speaker = db.Column(db.Integer)
 
-def handler():
+def handler(last_phrase):
+	if last_phrase == "Hello":
+		response = "Hello"
+	else:
+		response = "Sorry I don't understand :("
 	# This is where the magic happens!
-	return Conversation(phrase = "response", speaker =2 )
+	return Conversation(phrase = response, speaker =2 )
